@@ -59,6 +59,8 @@ export const calculateMonthlyPayment = function(monthlyRate: number, leaseInput:
   return payment;
 };
 
+const round = (n: number) => Math.round(n * 100) / 100;
+
 export const createSchedule = function(monthlyPayment: number, monthlyRate: number, leaseInput: LeaseInput): Installment[] {
   let balance = leaseInput.price;
   const schedule: Installment[] = [];
@@ -74,7 +76,7 @@ export const createSchedule = function(monthlyPayment: number, monthlyRate: numb
     schedule.push({
       period: i,
       dueDate: dueDate.toISOString(),
-      payment: monthlyPayment + leaseInput.monthlyFee,
+      payment: round(monthlyPayment + leaseInput.monthlyFee),
       interest,
       principal,
       fee: leaseInput.monthlyFee,
@@ -84,8 +86,6 @@ export const createSchedule = function(monthlyPayment: number, monthlyRate: numb
   }
   return schedule;
 };
-
-const round = (n: number) => Math.round(n * 100) / 100;
 
 export const newLeaseFromInput = function(leaseInput: LeaseInput): Lease {
   const monthlyRate = leaseInput.nominalRatePct / 100 / YEAR;
