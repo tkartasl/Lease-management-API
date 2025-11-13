@@ -27,6 +27,7 @@
     "create-lease/**/*",
     "payments/**/*",
     "quote/**/*",
-    "health-check/**/*"
+    "health-check/**/*",
+    "invalid-payment-queue/**/*"
   ]
 }

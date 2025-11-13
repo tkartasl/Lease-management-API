@@ -1,0 +1,16 @@
+*.js.map
+*.ts
+.git*
+.vscode
+local.settings.json
+test
+tests
+tsconfig.json
+.funcignore
+node_modules/@types
+src
+get-lease/*.ts
+create-lease/*.ts
+payments/*.ts
+quote/*.ts
+health-check/*.ts

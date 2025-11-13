@@ -1,0 +1,12 @@
+{
+  "bindings": [
+    {
+      "name": "invalidPayment",
+      "type": "queueTrigger",
+      "direction": "in",
+      "queueName": "invalid-payment-queue",
+      "connection": "AzureWebJobsStorage"
+    }
+  ],
+  "scriptFile": "../dist/invalid-payment-queue/index.js"
+}

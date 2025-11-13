@@ -26,11 +26,15 @@ export type Lease = LeaseInput & {
 };
 
 export type Installment = {
+  id: string;
   period: number;
   dueDate: string;
   payment: Money;
   interest: Money;
   principal: Money;
+  amountPaid: Money;
+  balance: Money;
+  lateInterest: Money;
   fee: Money;
   balanceAfter: Money;
   paid: Boolean;
@@ -75,11 +79,15 @@ export const createSchedule = function(monthlyPayment: number, monthlyRate: numb
     dueDate.setMonth(dueDate.getMonth() + i);
 
     schedule.push({
+      id: crypto.randomUUID(),
       period: i,
       dueDate: dueDate.toISOString(),
       payment: round(monthlyPayment + leaseInput.monthlyFee),
       interest,
       principal,
+      amountPaid: 0,
+      balance: round(monthlyPayment + leaseInput.monthlyFee),
+      lateInterest: 0,
       fee: leaseInput.monthlyFee,
       balanceAfter: Math.max(balance, 0),
       paid: false

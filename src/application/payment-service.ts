@@ -24,10 +24,21 @@ const paymentService = function(payment: Payment) {
 
   const validation = validatePaymentData(payment, lease);
   
-  if (validation.status === "Invalid" || validation.installment === null) {
+  if (validation.installment === null) {
+    return {
+      status: 404,
+      body: { error: "No installment found with this id" }
+    };
+  } else if (!validation.isValid) {
     return {
       status: 400,
-      body: validation.message
+      body: {
+        message: validation.message,
+        daysLate: validation.daysLate,
+        lease: lease,
+        payment: payment,
+        installment: validation.installment
+      }
     };
   }
   

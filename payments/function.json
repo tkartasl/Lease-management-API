@@ -12,6 +12,13 @@
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+        "type": "queue",
+        "direction": "out",
+        "queueName": "invalid-payment-queue",
+        "name": "invalidPayment",
+        "connection": "AzureWebJobsStorage"
     }
   ],
   "scriptFile": "../dist/payments/index.js"

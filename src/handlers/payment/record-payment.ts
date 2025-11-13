@@ -10,8 +10,10 @@ export const recordPayment = function(payment: Payment, lease: Lease, installmen
   lease.totals.totalPayments += payment.amount;
   lease.totals.totalInterest += interest;
   lease.totals.totalFees += installment.fee;
+  
+  const paidStatus = installment.balance <= 0;
   lease.schedule = lease.schedule.map(i =>
-    i.period === installment.period ? { ...i, paid: true, } : i
+    i.period === installment.period ? { ...i, paid: paidStatus, balance: installment.balance } : i
   );
 
   updateLease(lease);

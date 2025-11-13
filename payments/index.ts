@@ -11,7 +11,11 @@ const registerPayment: AzureFunction = async function (context: Context, req: Ht
     };
     return;
   }
+
   const response = paymentService(payment);
+  if (response.status === 400) {
+    context.bindings.invalidPayment = response.body
+  }
   context.res = {
     status: response.status,
     body: response.body,
